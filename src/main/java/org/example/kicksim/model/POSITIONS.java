@@ -1,6 +1,6 @@
 package org.example.kicksim.model;
 
-public enum POSITIONS {
+public enum Positions {
     STRIKER,
     RIGHT_WING,
     LEFT_WING,
