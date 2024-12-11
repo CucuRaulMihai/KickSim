@@ -11,10 +11,10 @@ public class Player {
     private Double skillLevel;
     private Double weight;
     private Double height;
-    private Positions position;
+    private PlayerPositions position;
     private Countries nationality;
 
-    public Player(String firstName, String lastName, Integer age, Double skillLevel, Double weight, Double height, Positions position, Countries nationality) {
+    public Player(String firstName, String lastName, Integer age, Double skillLevel, Double weight, Double height, PlayerPositions position, Countries nationality) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -81,11 +81,11 @@ public class Player {
         this.nationality = nationality;
     }
 
-    public Positions getPosition() {
+    public PlayerPositions getPosition() {
         return position;
     }
 
-    public void setPosition(Positions position) {
+    public void setPosition(PlayerPositions position) {
         this.position = position;
     }
 }
