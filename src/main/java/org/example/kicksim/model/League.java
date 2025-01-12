@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class League {
 
+    private Long id;
     private String name;
     private List<Team> teams;
     private List<Match> matches;
