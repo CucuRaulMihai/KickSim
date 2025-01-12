@@ -1,10 +1,9 @@
 package org.example.kicksim.model;
 
-import org.springframework.context.annotation.Bean;
 
-@Bean
 public class Player {
 
+    private Long id;
     private String firstName;
     private String lastName;
     private Integer age;
@@ -23,6 +22,14 @@ public class Player {
         this.height = height;
         this.position = position;
         this.nationality = nationality;
+    }
+
+    public Long getId(){
+        return id;
+    }
+
+    public void setIt(Long id){
+        this.id = id;
     }
 
     public String getFirstName() {
