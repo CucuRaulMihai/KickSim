@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CoachService {
 
-    private final CoachRepository coachRepository;
+    private CoachRepository coachRepository;
 
     public CoachService(CoachRepository coachRepository){
         this.coachRepository = coachRepository;

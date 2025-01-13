@@ -1,37 +1,58 @@
 package org.example.kicksim.model;
 
-import java.util.List;
+import jakarta.persistence.*;
+
 import java.util.Map;
 
+
+@Entity
+@Table(name = "matches")
 public class Match {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Team Team1;
-    private Team Team2;
+
+    @ManyToOne
+    @JoinColumn(name = "team1_id", nullable = false)
+    private Team team1;
+
+    @ManyToOne
+    @JoinColumn(name = "team2_id", nullable = false)
+    private Team team2;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private MatchDurations duration;
+
+    @ElementCollection
+    @CollectionTable(name = "matches_scores", joinColumns = @JoinColumn(name = "match_id"))
+    @MapKeyJoinColumn(name = "team_id")
+    @Column(name = "score")
     private Map<Team, Integer> score;
 
-    public Match(Team Team1, Team Team2, MatchDurations duration, Map<Team, Integer> score ) {
-        this.Team1 = Team1;
-        this.Team2 = Team2;
-        this.duration = duration;
-        this.score = score;
+    @ManyToOne
+    //nu e necesar ca un meci sa aiba un stadion, pentru exemplu didactic
+    @JoinColumn(name = "stadium_id", nullable = true)
+    private Stadium matchStadium;
+
+    public Match(){
     }
 
     public Team getTeam1() {
-        return Team1;
+        return team1;
     }
 
     public void setTeam1(Team team1) {
-        Team1 = team1;
+        this.team1 = team1;
     }
 
     public Team getTeam2() {
-        return Team2;
+        return team2;
     }
 
     public void setTeam2(Team team2) {
-        Team2 = team2;
+        this.team2 = team2;
     }
 
     public Map<Team, Integer> getScore(){
