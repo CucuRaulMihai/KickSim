@@ -1,5 +1,6 @@
 package org.example.kicksim.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Map;
@@ -25,11 +26,11 @@ public class Match {
     @Column(nullable = false)
     private MatchDurations duration;
 
-    @ElementCollection
-    @CollectionTable(name = "matches_scores", joinColumns = @JoinColumn(name = "match_id"))
-    @MapKeyJoinColumn(name = "team_id")
-    @Column(name = "score")
-    private Map<Team, Integer> score;
+    @Column(nullable = false)
+    private Integer teamScore1;
+
+    @Column(nullable = false)
+    private Integer teamScore2;
 
     @ManyToOne
     //nu e necesar ca un meci sa aiba un stadion, pentru exemplu didactic
@@ -55,12 +56,36 @@ public class Match {
         this.team2 = team2;
     }
 
-    public Map<Team, Integer> getScore(){
-        return score;
+    public Long getId() {
+        return id;
     }
 
-    void setScore(Map<Team, Integer> score){
-        this.score = score;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getTeamScore1() {
+        return teamScore1;
+    }
+
+    public void setTeamScore1(Integer teamScore1) {
+        this.teamScore1 = teamScore1;
+    }
+
+    public Integer getTeamScore2() {
+        return teamScore2;
+    }
+
+    public void setTeamScore2(Integer teamScore2) {
+        this.teamScore2 = teamScore2;
+    }
+
+    public Stadium getMatchStadium() {
+        return matchStadium;
+    }
+
+    public void setMatchStadium(Stadium matchStadium) {
+        this.matchStadium = matchStadium;
     }
 
     public MatchDurations getDuration(){

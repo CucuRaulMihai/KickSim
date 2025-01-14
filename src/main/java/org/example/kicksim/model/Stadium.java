@@ -2,6 +2,9 @@ package org.example.kicksim.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "stadiums")
@@ -11,12 +14,16 @@ public class Stadium {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Name is required")
     @Column(nullable = false)
     private String name;
 
+    @NotBlank(message = "Location is required")
     @Column(nullable = false)
     private String location;
 
+    @NotNull(message = "Capacity is required")
+    @Min(value = 1000, message = "Capacity must be at least 1000")
     @Column(nullable = false)
     private Integer capacity;
 
