@@ -1,6 +1,8 @@
 package org.example.kicksim.model;
 
 import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -36,18 +38,20 @@ public class Team {
     @Column(name = "year_founded", nullable = false)
     private Integer yearFounded;
 
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
+    @JsonSerialize(using = PlayerListSerializer.class)
     private List<Player> teamPlayers;
 
     @ManyToMany(mappedBy = "teams")
+    @JsonSerialize(using = CoachListSerializer.class)
     private List<Coach> coaches;
 
-    @OneToOne(mappedBy = "homeTeam", cascade = CascadeType.ALL, orphanRemoval = true, optional = true)
+    @OneToOne(mappedBy = "homeTeam", cascade = CascadeType.ALL, optional = true)
     private Stadium stadium;
 
     @ManyToOne
     @JoinColumn(name = "league_id", nullable = false)
-    @JsonIgnore
+    @JsonSerialize(using = LeagueSerializer.class)
     private League league;
 
 

@@ -2,6 +2,9 @@ package org.example.kicksim.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "players")
@@ -20,6 +23,9 @@ public class Player {
     @Column(nullable = false)
     private Integer age;
 
+    @NotNull(message = "The player skillLevel must not be null.")
+    @Min(value = 1, message = "Skill Level must be at least 1.")
+    @Max(value = 100, message = "Skill Level must be between 1 - 100.")
     @Column(name = "skill_level", nullable = false)
     private Double skillLevel;
 
