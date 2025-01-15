@@ -1,8 +1,6 @@
 package org.example.kicksim.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -42,7 +40,7 @@ public class Team {
     private List<Player> teamPlayers;
 
     @ManyToMany(mappedBy = "teams")
-    private Set<Coach> coaches;
+    private List<Coach> coaches;
 
     @OneToOne(mappedBy = "homeTeam", cascade = CascadeType.ALL, orphanRemoval = true, optional = true)
     private Stadium stadium;
@@ -96,11 +94,11 @@ public class Team {
         this.teamPlayers = teamPlayers;
     }
 
-    public Set<Coach> getCoaches() {
+    public List<Coach> getCoaches() {
         return coaches;
     }
 
-    public void setCoaches(Set<Coach> coaches) {
+    public void setCoaches(List<Coach> coaches) {
         this.coaches = coaches;
     }
 

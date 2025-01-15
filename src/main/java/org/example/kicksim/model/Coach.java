@@ -1,8 +1,12 @@
 package org.example.kicksim.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,13 +29,14 @@ public class Coach {
     @Column(nullable = false)
     private Integer experience;
 
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(
             name = "coach_team",
             joinColumns = @JoinColumn(name = "coach_id"),
             inverseJoinColumns = @JoinColumn(name = "team_id")
     )
-    private Set<Team> teams;
+    @JsonSerialize(using = TeamListSerializer.class)
+    private List<Team> teams;
 
     public Coach(){
 
@@ -77,11 +82,11 @@ public class Coach {
         this.experience = experience;
     }
 
-    public Set<Team> getTeams() {
+    public List<Team> getTeams() {
         return teams;
     }
 
-    public void setTeams(Set<Team> teams) {
+    public void setTeams(List<Team> teams) {
         this.teams = teams;
     }
 }

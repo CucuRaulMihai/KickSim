@@ -1,5 +1,6 @@
 package org.example.kicksim.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 
 @Entity
@@ -38,6 +39,7 @@ public class Player {
 
     @ManyToOne
     @JoinColumn(name = "team_id", nullable = true)
+    @JsonSerialize(using = TeamSerializer.class)
     private Team team;
 
     public Player(){
